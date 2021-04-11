@@ -1,6 +1,5 @@
 {
-  "Chave": "",
-  "ConnectionString" {
+  "ConnectionStrings": {
     "SqlServerConnection": "",
     "QuickBuyDB": "server=localhost;database=QuickBuyDB;uid=root;pwd=1234"
   }
