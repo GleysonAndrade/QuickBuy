@@ -1,6 +1,6 @@
 ﻿namespace QuickBuy.Dominio.Enumerados
 {
-    public enum TipoFormaPagamentoEnum
+    public enum TipoFormaPagamentoEnum 
     {
         NaoDefinido = 0,
         Boleto = 1,
