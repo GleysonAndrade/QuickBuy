@@ -1,4 +1,5 @@
 ﻿using QuickBuy.Dominio.Contratos;
+using QuickBuy.Repositorio.Contexto;
 using System;
 using System.Collections.Generic;
 
@@ -6,39 +7,44 @@ namespace QuickBuy.Repositorio.Repositorio
 {
     public class BaseRepositorio<TEntity> : IBaseRepositorio<TEntity> where TEntity : class
     {
-        public BaseRepositorio()
-        {
+        protected readonly QuickBuyContext QuickBuyContext
 
+        public BaseRepositorio(QuickBuyContext quickBuyContext)
+        {
+            QuickBuyContext = quickBuyContext;
         }
 
         public void Adicionar(TEntity entity)
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Set<TEntity>().Add(entity);
+            QuickBuyContext.SaveChances();
         }
 
         public void Atualizar(TEntity entity)
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Set<TEntity>().Update(entity)
+            QuickBuyContext.SaveChances();
         }
 
         public IEnumerable<TEntity> OberTodos()
         {
-            throw new NotImplementedException();
+            return QuickBuyContext.Set<TEntity>(),ToList();
         }
 
         public TEntity ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return QuickBuyContext.Set<TEntity>().Find(id);
         }
 
         public void Remover(TEntity entity)
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Remover(entity);
+            QuickBuyContext.SaveChances();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            QuickBuyContext.Dispose();
         }
     }
 }
