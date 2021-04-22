@@ -2,12 +2,13 @@
 using QuickBuy.Repositorio.Contexto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuickBuy.Repositorio.Repositorio
 {
     public class BaseRepositorio<TEntity> : IBaseRepositorio<TEntity> where TEntity : class
     {
-        protected readonly QuickBuyContext QuickBuyContext
+        protected readonly QuickBuyContext QuickBuyContext;
 
         public BaseRepositorio(QuickBuyContext quickBuyContext)
         {
@@ -17,18 +18,18 @@ namespace QuickBuy.Repositorio.Repositorio
         public void Adicionar(TEntity entity)
         {
             QuickBuyContext.Set<TEntity>().Add(entity);
-            QuickBuyContext.SaveChances();
+            QuickBuyContext.SaveChanges();
         }
 
         public void Atualizar(TEntity entity)
         {
-            QuickBuyContext.Set<TEntity>().Update(entity)
-            QuickBuyContext.SaveChances();
+            QuickBuyContext.Set<TEntity>().Update(entity);
+            QuickBuyContext.SaveChanges();
         }
 
         public IEnumerable<TEntity> OberTodos()
         {
-            return QuickBuyContext.Set<TEntity>(),ToList();
+            return QuickBuyContext.Set<TEntity>().ToList();
         }
 
         public TEntity ObterPorId(int id)
@@ -38,8 +39,8 @@ namespace QuickBuy.Repositorio.Repositorio
 
         public void Remover(TEntity entity)
         {
-            QuickBuyContext.Remover(entity);
-            QuickBuyContext.SaveChances();
+            QuickBuyContext.Remove(entity);
+            QuickBuyContext.SaveChanges();
         }
 
         public void Dispose()

@@ -1,6 +1,7 @@
-using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuickBuy.Dominio.Contratos;
+using QuickBuy.Dominio.Entidades;
+using System;
 
 namespace QuickBuy.Web.Controllers
 {
@@ -12,13 +13,15 @@ namespace QuickBuy.Web.Controllers
         {
             _produtoRepositorio = produtoRepositorio;
         }
+
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
                 return Ok(_produtoRepositorio.OberTodos());
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex.ToString());
             }
@@ -29,10 +32,8 @@ namespace QuickBuy.Web.Controllers
         {
             try
             {
-                var produto = new Produto();
-                produto.Nome = "";
                 _produtoRepositorio.Adicionar(produto);
-                return Created("api/", produto);
+                return Created("api/produto", produto);
             }
             catch (Exception ex)
             {
