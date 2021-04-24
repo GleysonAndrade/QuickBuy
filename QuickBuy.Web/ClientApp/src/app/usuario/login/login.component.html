@@ -21,6 +21,7 @@
         Email deve estar no formato correto!
       </div>
     </div>
+    <br/>
     <label for="inputSenha" class="sr-only">Senha</label>
     <input type="password" id="inputSenha" name="senha" class="form-control" [ngClass]="{
            'is-invalid':senha.invalid && (senha.dirty || senha.touched),
@@ -34,12 +35,7 @@
       </div>
     </div>
     <br />
-    <button class="btn btn-primary btn-block" type="submit" (click)="entrar()">Entrar</button>
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="entrar()">Entrar</button>
     <br />
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Lembre me
-      </label>
-    </div>
   </form>
 </div>
