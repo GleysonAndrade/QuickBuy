@@ -1,7 +1,7 @@
 <div class="text-center">
   <form class="form-signin">
     <div class="text-center mb-4">
-      <img src="/ClientApp/src/assets/img/quick-b-logo.jpg" alt="" width="72" height="72">
+      <img src="../../../assets/img/quick-b-logo.jpg" alt="" width="72" height="72">
     </div>
 
     <h1 class="h3 mb-3 font-weight-normal">LOGIN CLIENTE</h1>
@@ -35,7 +35,12 @@
       </div>
     </div>
     <br />
-    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="entrar()">Entrar</button>
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="entrar()" [disabled]="ativar_spinner">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+    Entrar</button>
     <br />
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{ mensagem }}
+    </div>
   </form>
 </div>
