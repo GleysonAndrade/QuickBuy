@@ -1,0 +1,11 @@
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "Selecionar";
+}
+
+.invalid-feedbck{
+    display: block;
+}
+
+.valid-feedbck {
+  display: block;
+}

@@ -6,74 +6,91 @@
 
     <h1 class="h3 mb-3 font-weight-normal">CADASTRO USUARIO</h1>
 
-    <label for="inputEmail" class="sr-only">Email </label>
-    <input type="email" id="inputEmail" name="email" class="form-control mb-1" [ngClass]="{
-           'is-invalid':email.invalid && (email.dirty || email.touched),
-           'is-valid':email.valid && (email.dirty || email.touched)
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="email" id="inputEmail"
+           name="email" placeholder="Email"
+           class="form-control mb-2"
+           [ngClass]="{
+            'is-invalid':email.invalid && (email.dirty || email.touched),
+            'is-valid':email.valid && (email.dirty || email.touched)
            }"
-           [(ngModel)]="usuario.email" placeholder="Email"
-           #email="ngModel" email required autofocus />
-    <div class="invalid-feedback mb-1" *ngIf="email.invalid && (email.dirty || email.touched)">
+           [(ngModel)]="usuario.email"
+           #email="ngModel"
+           email
+           required />
+
+    <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
       <div *ngIf="email.errors.required">
-        Email é de preenchimento obrigatório!
+        Email é de preenchimento obrigatório
       </div>
       <div *ngIf="email.errors.email">
-        Email deve estar no formato correto!
+        Email está no formato inválido
       </div>
     </div>
 
-    <br />
     <label for="inputSenha" class="sr-only">Senha</label>
-    <input type="password" id="inputSenha" name="senha" class="form-control" [ngClass]="{
-           'is-invalid':senha.invalid && (senha.dirty || senha.touched),
-           'is-valid':senha.valid && (senha.dirty || senha.touched)
+    <input type="password" id="inputSenha"
+           name="senha" placeholder="Senha"
+           class="form-control mb-2"
+           #senha="ngModel"
+           [(ngModel)]="usuario.senha"
+           [ngClass]="{
+            'is-invalid':senha.invalid && (senha.dirty || senha.touched),
+            'is-valid':senha.valid && (senha.dirty || senha.touched)
            }"
-           [(ngModel)]="usuario.senha" placeholder="Senha"
-           #senha="ngModel" senha required />
-    <div class="invalid-feedback mb-1" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
+           required />
+    <div class="invalid-feedback mb-2" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
       <div *ngIf="senha.errors.required">
-        Senha é de preenchimento obrigatório!
+        Senha deve ser informada
       </div>
     </div>
-    <br />
-    <label for="inputNome" class="sr-only">Nome </label>
-    <input type="text" id="inputNome" name="nome" class="form-control mb-1" [ngClass]="{
-           'is-invalid':nome.invalid && (nome.dirty || nome.touched),
-           'is-valid':nome.valid && (nome.dirty || nome.touched)
+
+    <label for="inputNome" class="sr-only">Nome</label>
+    <input type="text" id="inputNome"
+           name="nome" placeholder="Nome"
+           class="form-control mb-2"
+           [ngClass]="{
+            'is-invalid':nome.invalid && (nome.dirty || nome.touched),
+            'is-valid':nome.valid && (nome.dirty || nome.touched)
            }"
-           [(ngModel)]="usuario.nome" placeholder="Nome"
-           #nome="ngModel" nome required />
-    <div class="invalid-feedback mb-1" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+           [(ngModel)]="usuario.nome"
+           #nome="ngModel"
+           required />
+
+    <div class="invalid-feedback mb-2" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
       <div *ngIf="nome.errors.required">
-        Nome é de preenchimento obrigatório!
+        Nome é de preenchimento obrigatório
       </div>
     </div>
-    <br />
-    <label for="inputSobreNome" class="sr-only">SobreNome </label>
-    <input type="text" id="inputSobreNome" name="sobreNome" class="form-control mb-1" [ngClass]="{
-           'is-invalid':sobrenome.invalid && (sobreNome.dirty || sobreNome.touched),
-           'is-valid':sobreNome.valid && (sobreNome.dirty || sobreNome.touched)
+
+    <label for="inputSobreNome" class="sr-only">Sobre Nome</label>
+    <input type="text" id="inputSobreNome"
+           name="sobreNome" placeholder="Sobre Nome"
+           class="form-control mb-2"
+           [ngClass]="{
+            'is-invalid':sobreNome.invalid && (sobreNome.dirty || sobreNome.touched),
+            'is-valid':sobreNome.valid && (sobreNome.dirty || sobreNome.touched)
            }"
-           [(ngModel)]="usuario.sobreNome" placeholder="Sobrenome"
-           #email="ngModel" sobreNome required />
-    <div class="invalid-feedback mb-1" *ngIf="sobreNome.invalid && (sobreNome.dirty || sobreNome.touched)">
+           [(ngModel)]="usuario.sobreNome"
+           #sobreNome="ngModel"
+           required />
+
+    <div class="invalid-feedback mb-2" *ngIf="sobreNome.invalid && (sobreNome.dirty || sobreNome.touched)">
       <div *ngIf="sobreNome.errors.required">
-        Sobre nome é de preenchimento obrigatório!
+        Sobre Nome é de preenchimento obrigatório
       </div>
     </div>
-
-    <br />
-
-    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="cadastrar()" [disabled]="ativar_spinner">
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="cadastrar()" [disabled]="!formSign.valid">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
       Cadastrar
     </button>
-    <div>
-      <a [routerLink]='["/entrar"]'>Voltar</a>
-    </div>
-    <br />
+    <div><a [routerLink]='["/entrar"]'>Voltar</a></div>
+
     <div class="alert alert-danger" *ngIf="mensagem">
-      {{ mensagem }}
+      {{mensagem}}
+    </div>
+    <div class="alert alert-success" *ngIf="usuarioCadastrado">
+      Usuario cadastrado com sucesso!<a class="alert-link" [routerLink]='["/entrar"]'>Clique aqui</a> para entrar no sistema com a sua conta.
     </div>
   </form>
 </div>
